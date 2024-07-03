@@ -27,7 +27,8 @@ public class CacheClient {
     }
     public void set(String key, Object value, Long time, TimeUnit unit){
         stringRedisTemplate.opsForValue().set(key, JSONUtil.toJsonStr(value), time, unit);
-    }public void setWithLogicalExpire(String key, Object value, Long time, TimeUnit unit){
+    }
+    public void setWithLogicalExpire(String key, Object value, Long time, TimeUnit unit){
         RedisData redisData = new RedisData();
         redisData.setData(value);
         redisData.setExpireTime(LocalDateTime.now().plusSeconds(unit.toSeconds(time)));
@@ -68,7 +69,7 @@ public class CacheClient {
 //        1、从redis查商铺缓存
         String json = stringRedisTemplate.opsForValue().get(key);
 //        2、判断是否存在
-        if (StrUtil.isBlank(json)){
+        if (!StrUtil.isBlank(json)){
             return null;
         }
         RedisData redisData = JSONUtil.toBean(json, RedisData.class);

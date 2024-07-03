@@ -4,6 +4,7 @@ import io.lettuce.core.TimeoutOptions;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -11,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class RedisIdWorker {
     private static final long BEGIN_TIMESTAMP = 1640995200L;
+    @Resource
     private StringRedisTemplate stringRedisTemplate;
     public RedisIdWorker(StringRedisTemplate stringRedisTemplate) {
         this.stringRedisTemplate = stringRedisTemplate;
